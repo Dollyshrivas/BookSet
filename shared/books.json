@@ -1,0 +1,30 @@
+[
+  {
+    "id": 1,
+    "title": "Atomic Habits",
+    "author": "James Clear",
+    "price": 499,
+    "image": "https://images-na.ssl-images-amazon.com/images/I/91bYsX41DVL.jpg"
+  },
+  {
+    "id": 2,
+    "title": "The Psychology of Money",
+    "author": "Morgan Housel",
+    "price": 399,
+    "image": "https://images-na.ssl-images-amazon.com/images/I/71g2ednj0JL.jpg"
+  },
+  {
+    "id": 3,
+    "title": "Ikigai",
+    "author": "Héctor García",
+    "price": 350,
+    "image": "https://images-na.ssl-images-amazon.com/images/I/81l3rZK4lnL.jpg"
+  },
+  {
+    "id": 4,
+    "title": "Rich Dad Poor Dad",
+    "author": "Robert Kiyosaki",
+    "price": 450,
+    "image": "https://images-na.ssl-images-amazon.com/images/I/81bsw6fnUiL.jpg"
+  }
+]

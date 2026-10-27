@@ -1,0 +1,25 @@
+{
+  "name": "book-management",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "cors": "^2.8.6",
+    "dotenv": "^17.2.3",
+    "express": "^5.2.1",
+    "express-session": "^1.19.0",
+    "iconv-lite": "^0.7.3",
+    "mongoose": "^9.4.1",
+    "nodemon": "^3.1.11",
+    "razorpay": "^2.9.8"
+  }
+}
