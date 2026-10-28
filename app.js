@@ -50,12 +50,21 @@ const connectToDatabase = async () => {
 connectToDatabase();
 
 // CORS
+const allowedOrigins = [
+  "http://localhost:5173",
+  "http://localhost:5174",
+  ...(process.env.FRONTEND_URL || "")
+    .split(",")
+    .map((origin) => origin.trim())
+    .filter(Boolean),
+];
 app.use(cors({
-  origin: [
-    "http://localhost:5173",
-    "http://localhost:5174",
-    ...(process.env.FRONTEND_URL ? [process.env.FRONTEND_URL] : []),
-  ],
+  origin(origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    }
+    return callback(new Error("Origin not allowed by CORS"));
+  },
   credentials: true
 }));
 
@@ -72,8 +81,9 @@ app.set("trust proxy", 1);
 
 // Session
 const session = require("express-session");
+const MongoStore = require("connect-mongo").default;
 
-app.use(session({
+const sessionOptions = {
   secret: sessionSecret,
   resave: false,
   saveUninitialized: false,
@@ -83,7 +93,16 @@ app.use(session({
     secure: isProduction,
     sameSite: isProduction ? "none" : "lax",
   }
-}));
+};
+
+if (process.env.DB_URI) {
+  sessionOptions.store = MongoStore.create({
+    mongoUrl: process.env.DB_URI,
+    collectionName: "sessions",
+  });
+}
+
+app.use(session(sessionOptions));
 
 // Routes
 app.use("/api/v1", user);
@@ -93,6 +112,10 @@ app.use("/api/v1", orders);
 
 app.get("/", (req, res) => {
   res.send("hello");
+});
+
+app.get("/health", (req, res) => {
+  res.status(200).json({ status: "ok" });
 });
 
 // LOCAL ONLY
